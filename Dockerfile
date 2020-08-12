@@ -1,2 +1,2 @@
-FROM maven:latest
-RUN apt-get update && apt-get install -y git docker.io
+FROM ubuntu:18.04
+RUN apt update && apt install -y default-jdk maven git docker.io
