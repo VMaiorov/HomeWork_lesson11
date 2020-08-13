@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image '130.193.46.138:8123/mydockerrepo/buildserv'
+            image '84.201.144.112:8123/mydockerrepo/buildserv'
         }
     }
     stages {
@@ -26,14 +26,14 @@ pipeline {
         
         stage ('push image to registry') {
             steps {
-                sh 'docker login -u admin -p 1qaz http://130.193.46.138:8123 && docker tag app 130.193.46.138:8123/app && docker push 130.193.46.138:8123/app'
+                sh 'docker login -u admin -p 1qaz http://84.201.144.112:8123 && docker tag app 84.201.144.112:8123/app && docker push 84.201.144.112:8123/app'
             }
         }
         
         stage ('deploy') {
             steps {
-                sshagent (credentials: ['593b6ae5-6e95-4197-9046-6a41d437cad7']) {
-                    sh 'ssh root@84.201.149.201 && docker login -u admin -p 1qaz http://130.193.46.138:8123 && docker pull 130.193.46.138:8123/app && docker run -d app'
+                sshagent (credentials: ['7832c568-88bb-45fb-9fb2-88ad69f9f8e8']) {
+                    sh 'ssh root@130.193.45.108 && docker login -u admin -p 1qaz http://84.201.144.112:8123 && docker pull 84.201.144.112:8123/app && docker run -d app'
                 }
             }
         }
